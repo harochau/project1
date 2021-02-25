@@ -1,0 +1,84 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Динамическая покраска меню сайта</title>
+
+</head>
+<body>
+    <h1>Дизайн меню</h1>
+    <nav id="nav1"></nav>
+    <p id="p1"></p>
+    
+    <form  id="form1">
+        Введите пункты меню через запятую <br><input id="textline" type="text" placeholder = "Введите элемены меню" value="Главная, О компании, Новости" ></imput>
+        <input type="button" value="Преобразовать!" onclick="converter()">
+    </form>
+    
+    <br>
+    <p id="p-fontCol">Цвет текста <input type="color" id="colorpicker_font" value="#ff00ff"></p>
+    <p id="p-backCol">Цвет фона <input type="color" id="colorpicker_back" value="#00ffff"></p>
+    <p id="p-hoverCol">Цвет hover <input type="color" id="colorpicker_hover" value="#ffff00"></p>
+    <!-- <span>Цвет текста </span><span><table class = "tbl-visualization" id="table-text" ><th>vis</th></table></span>
+    <span>Цвет текста </span><span><table class = "tbl-visualization" id="table-backgr" ><th>vis</th></table></span>
+    <span>Цвет текста </span><span><table class = "tbl-visualization" id="table-hover" ><th>vis</th></table></span> -->
+    <table id="table1"></table>
+    <p id="p2"></p>
+    <script>
+        function converter(){
+            // alert(textline.value);
+            s = '';
+            let words = textline.value.split(",");
+            for (let i=0;i<words.length;i++)
+                s += `<th class = "cell1" onmouseover="changeColor(this)" onmouseout="backColor(this)"
+                onmousedown = "showImage()"
+                style="color:${colorpicker_font.value} ; background-color: ${colorpicker_back.value};"
+                 id="th${i}">${words[i]}</th>`
+            table1.innerHTML = s;
+        }
+        function changeColor(elem){            
+            elem.style.backgroundColor = `${colorpicker_hover.value}`;                     
+        }
+        function backColor(elem){            
+            elem.style.backgroundColor = `${colorpicker_back.value}`;                     
+        }
+        
+        function showImage(){
+
+            let i = Math.floor(Math.random()*10)+1;
+            console.log(i);
+            p2.innerHTML = `<img src="images/${i}.png" alt="${i}.png">`
+
+        }
+        
+
+
+
+    </script>
+    <style> 
+        .cell1{
+            /* background-color: salmon; */
+            /* padding: 0;
+            margin: 0; */
+            border-spacing: 0;
+            border-collapse: collapse;
+            height: 50px;
+            width: 100px;
+            border: 0px none;
+        }
+        /* .tbl-visualization{
+            width: 70px;
+            height: 30px;
+            background-color: cornflowerblue;
+        } */
+        /* th:hover{
+            background-color: black;
+        } */
+        #textline{
+            width:300px;
+        }
+    </style>
+    
+</body>
+</html>
